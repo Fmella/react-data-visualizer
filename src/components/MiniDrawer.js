@@ -20,6 +20,8 @@ import InsightsIcon from '@mui/icons-material/Insights';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ProfileIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
+import DarkModeIcon from '@mui/icons-material/Brightness4';
+import LightModeIcon from '@mui/icons-material/Brightness7';
 
 const drawerWidth = 240;
 
@@ -88,7 +90,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer({ children }) {
+export default function MiniDrawer({ darkMode, toggleDarkMode, children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -154,6 +156,30 @@ export default function MiniDrawer({ children }) {
               </ListItemButton>
             </ListItem>
           ))}
+        </List>
+        <Divider />
+        <List>
+          <ListItem key="mode" disablePadding sx={{ display: 'block '}}>
+            <ListItemButton
+              onClick={toggleDarkMode}
+              sx = {{
+                minHeight: 48,
+                justifyContent: open ? 'start' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+              </ListItemIcon>
+              <ListItemText primary={darkMode ? "Light Mode" : "Dark Mode"} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

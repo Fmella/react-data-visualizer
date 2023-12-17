@@ -1,34 +1,62 @@
 import Highcharts from 'highcharts';
 import { HighchartsReact } from 'highcharts-react-official'
-import { Box, CircularProgress, Container } from '@mui/material';
+import { CircularProgress, Container } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const SpeedChart = ( {data, isLoading} ) => {
+    const theme = useTheme();
+    console.log(theme);
+
     const options = {
         chart: {
             type: "area",
-            zoomType: "x"
+            zoomType: "x",
+            backgroundColor: theme.palette.background.paper
         },
         xAxis: {
             type: "datetime",
             title: {
-                text: "Fecha (min)"
+                text: "Fecha (min)",
+                style: {
+                    color: theme.palette.text.secondary
+                }
+            },
+            labels: {
+                style: {
+                    color: theme.palette.text.primary
+                }
             }
         },
         yAxis: {
             title: {
-                text: "Velocidad (u/min)"
-            }
+                text: "Velocidad (u/min)",
+                style: {
+                    color: theme.palette.text.secondary
+                }
+            },
+            labels: {
+                style: {
+                    color: theme.palette.text.primary
+                }
+            },
+            gridLineColor: theme.palette.mode === "light" ? theme.palette.grey[200] : theme.palette.grey[700]
         },
         legend: {
             enabled: false
         },
         title: {
             text: "Velocidad por minuto en el tiempo",
-            align: "left"
+            align: "left",
+            style: {
+                color: theme.palette.text.primary
+            }
         },
         subtitle: {
             text: "Selecciona y arrastra con el puntero la zona que quieras hacer zoom",
-            align: "left"
+            align: "left",
+            style: {
+                color: theme.palette.text.secondary
+            }
         },
         plotOptions: {
             area: {

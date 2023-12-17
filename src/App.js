@@ -5,10 +5,18 @@ import './style.css';
 import Grid from '@mui/material/Unstable_Grid2';
 import MiniDrawer from './components/MiniDrawer';
 import SpeedChart from './components/SpeedChart';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 export default function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    console.log(darkMode);
+  };
 
   useEffect(() => {
     let ignore = false;
@@ -26,15 +34,24 @@ export default function App() {
       }
   }, []);
 
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light",
+    },
+  });
+
   return (
     <>
-      <MiniDrawer>
-        <Grid container spacing={2}>
-          <Grid xs={11}>
-            <SpeedChart data={data} isLoading={loading} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <MiniDrawer darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
+          <Grid container spacing={2}>
+            <Grid xs={11}>
+              <SpeedChart data={data} isLoading={loading} />
+            </Grid>
           </Grid>
-        </Grid>
-      </MiniDrawer>
+        </MiniDrawer>
+      </ThemeProvider>
     </>
   );
 }
