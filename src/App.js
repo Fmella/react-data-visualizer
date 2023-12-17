@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import './style.css';
 
 import SpeedChart from './components/SpeedChart';
+import MiniDrawer from './components/MiniDrawer';
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -26,7 +27,9 @@ export default function App() {
 
   return (
     <>
-      <SpeedChart data={data} isLoading={loading} />
+      <MiniDrawer
+        children={<SpeedChart data={data} isLoading={loading} />}>
+      </MiniDrawer>
     </>
   );
 }
