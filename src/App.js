@@ -2,8 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import './style.css';
 
-import SpeedChart from './components/SpeedChart';
+import Grid from '@mui/material/Unstable_Grid2';
 import MiniDrawer from './components/MiniDrawer';
+import SpeedChart from './components/SpeedChart';
 
 export default function App() {
   const [data, setData] = useState([]);
@@ -27,8 +28,12 @@ export default function App() {
 
   return (
     <>
-      <MiniDrawer
-        children={<SpeedChart data={data} isLoading={loading} />}>
+      <MiniDrawer>
+        <Grid container spacing={2}>
+          <Grid xs={11}>
+            <SpeedChart data={data} isLoading={loading} />
+          </Grid>
+        </Grid>
       </MiniDrawer>
     </>
   );
